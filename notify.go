@@ -1506,7 +1506,18 @@ func (c *Client) LoadTxFilterAsync(reload bool, addresses []dcrutil.Address,
 
 	addrStrs := make([]string, len(addresses))
 	for i, a := range addresses {
-		addrStrs[i] = a.EncodeAddress()
+		switch addr := a.(type) {
+		case *dcrutil.AddressSecpPubKey :
+			addrStrs[i] = addr.EncodeAddress()
+		case *dcrutil.AddressBlissPubKey:
+			addrStrs[i] = addr.EncodeAddress()
+		case *dcrutil.AddressPubKeyHash:
+			addrStrs[i] = addr.EncodeAddress()
+		case *dcrutil.AddressScriptHash:
+			addrStrs[i] = addr.EncodeAddress()
+		default:
+			addrStrs[i] = addr.EncodeAddress()
+		}
 	}
 	outPointObjects := make([]dcrjson.OutPoint, len(outPoints))
 	for i := range outPoints {

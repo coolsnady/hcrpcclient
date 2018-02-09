@@ -1,5 +1,6 @@
 // Copyright (c) 2014-2015 The btcsuite developers
 // Copyright (c) 2015-2016 The Decred developers
+// Copyright (c) 2017 The Dcr developers
 // Use of this source code is governed by an ISC
 // license that can be found in the LICENSE file.
 
@@ -209,12 +210,22 @@ func (r FutureExistsAddressesResult) Receive() (string, error) {
 // result of the RPC at some future time by invoking the Receive function on the
 // returned instance.
 func (c *Client) ExistsAddressesAsync(addresses []dcrutil.Address) FutureExistsAddressesResult {
-	addrsStr := make([]string, len(addresses))
-	for i := range addresses {
-		addrsStr[i] = addresses[i].EncodeAddress()
+	addrStrs := make([]string, len(addresses))
+	for i, a := range addresses {
+		switch addr := a.(type) {
+		case *dcrutil.AddressSecpPubKey :
+			addrStrs[i] = addr.EncodeAddress()
+		case *dcrutil.AddressBlissPubKey:
+			addrStrs[i] = addr.EncodeAddress()
+		case *dcrutil.AddressPubKeyHash:
+			addrStrs[i] = addr.EncodeAddress()
+		case *dcrutil.AddressScriptHash:
+			addrStrs[i] = addr.EncodeAddress()
+		default:
+			addrStrs[i] = addr.EncodeAddress()
+		}
 	}
-
-	cmd := dcrjson.NewExistsAddressesCmd(addrsStr)
+	cmd := dcrjson.NewExistsAddressesCmd(addrStrs)
 	return c.sendCmd(cmd)
 }
 
