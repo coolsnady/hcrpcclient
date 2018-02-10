@@ -9,7 +9,7 @@ import:
   subpackages:
   - spew
 - package: github.com/decred/dcrd
-  repo: git@github.com/hybridnetwork/hxd/hxd
+  repo: git@github.com:hybridnetwork/hxd
   version: post-quataum
   subpackages:
   - blockchain/stake
@@ -17,3 +17,5 @@ import:
   - dcrjson
   - wire
 - package: github.com/decred/dcrutil
+  repo: git@github.com:hybridnetwork/hxutil
+  version: post-quataum
