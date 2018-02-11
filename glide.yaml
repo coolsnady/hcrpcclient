@@ -10,7 +10,7 @@ import:
   - spew
 - package: github.com/decred/dcrd
   repo: git@github.com:hybridnetwork/hxd
-  version: post-quataum
+  version: bogrod-pqdev
   subpackages:
   - blockchain/stake
   - chaincfg/chainhash
@@ -18,4 +18,4 @@ import:
   - wire
 - package: github.com/decred/dcrutil
   repo: git@github.com:hybridnetwork/hxutil
-  version: post-quataum
+  version: bogrod-pqdev
