@@ -1,4 +1,4 @@
-package: github.com/decred/dcrrpcclient
+package: github.com/hybridnetwork/hxrpcclient
 import:
 - package: github.com/btcsuite/btclog
 - package: github.com/btcsuite/go-socks
@@ -8,14 +8,12 @@ import:
 - package: github.com/davecgh/go-spew
   subpackages:
   - spew
-- package: github.com/decred/dcrd
-  repo: git@github.com:hybridnetwork/hxd
-  version: bogrod-pqdev
+- package: github.com/hybridnetwork/hxd
+  version: dev-v0.0.1
   subpackages:
   - blockchain/stake
   - chaincfg/chainhash
   - dcrjson
   - wire
-- package: github.com/decred/dcrutil
-  repo: git@github.com:hybridnetwork/hxutil
-  version: bogrod-pqdev
+- package: github.com/hybridnetwork/hxutil
+  version: dev-v0.0.1

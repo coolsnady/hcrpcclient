@@ -12,8 +12,8 @@ import (
 	"time"
 
 	"github.com/davecgh/go-spew/spew"
-	"github.com/decred/dcrrpcclient"
-	"github.com/decred/dcrutil"
+	dcrrpcclient "github.com/hybridnetwork/hxrpcclient"
+	dcrutil "github.com/hybridnetwork/hxutil"
 )
 
 func main() {

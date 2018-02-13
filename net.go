@@ -8,7 +8,7 @@ package dcrrpcclient
 import (
 	"encoding/json"
 
-	"github.com/decred/dcrd/dcrjson"
+	"github.com/hybridnetwork/hxd/dcrjson"
 )
 
 // AddNodeCommand enumerates the available commands that the AddNode function
