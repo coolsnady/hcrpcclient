@@ -30,13 +30,13 @@ func main() {
 	}
 
 	// Connect to local dcrd RPC server using websockets.
-	dcrdHomeDir := dcrutil.AppDataDir("dcrd", false)
+	dcrdHomeDir := dcrutil.AppDataDir("hxd", false)
 	certs, err := ioutil.ReadFile(filepath.Join(dcrdHomeDir, "rpc.cert"))
 	if err != nil {
 		log.Fatal(err)
 	}
 	connCfg := &dcrrpcclient.ConnConfig{
-		Host:         "localhost:9109",
+		Host:         "localhost:14009",
 		Endpoint:     "ws",
 		User:         "yourrpcuser",
 		Pass:         "yourrpcpass",

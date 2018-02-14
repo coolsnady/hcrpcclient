@@ -29,13 +29,13 @@ func main() {
 	}
 
 	// Connect to local dcrwallet RPC server using websockets.
-	certHomeDir := dcrutil.AppDataDir("dcrwallet", false)
+	certHomeDir := dcrutil.AppDataDir("hxwallet", false)
 	certs, err := ioutil.ReadFile(filepath.Join(certHomeDir, "rpc.cert"))
 	if err != nil {
 		log.Fatal(err)
 	}
 	connCfg := &dcrrpcclient.ConnConfig{
-		Host:         "localhost:9110",
+		Host:         "localhost:14010",
 		Endpoint:     "ws",
 		User:         "yourrpcuser",
 		Pass:         "yourrpcpass",
