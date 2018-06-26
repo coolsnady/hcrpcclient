@@ -3,7 +3,7 @@
 // Use of this source code is governed by an ISC
 // license that can be found in the LICENSE file.
 
-package dcrrpcclient
+package hcrpcclient
 
 import (
 	"bytes"
@@ -24,7 +24,7 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/hybridnetwork/hxd/dcrjson"
+	"github.com/coolsnady/hcd/dcrjson"
 
 	"github.com/btcsuite/go-socks/socks"
 	"github.com/btcsuite/websocket"

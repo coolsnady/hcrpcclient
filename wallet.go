@@ -3,16 +3,16 @@
 // Use of this source code is governed by an ISC
 // license that can be found in the LICENSE file.
 
-package dcrrpcclient
+package hcrpcclient
 
 import (
 	"encoding/hex"
 	"encoding/json"
 
-	"github.com/hybridnetwork/hxd/chaincfg/chainhash"
-	"github.com/hybridnetwork/hxd/dcrjson"
-	"github.com/hybridnetwork/hxd/wire"
-	dcrutil "github.com/hybridnetwork/hxutil"
+	"github.com/coolsnady/hcd/chaincfg/chainhash"
+	"github.com/coolsnady/hcd/dcrjson"
+	"github.com/coolsnady/hcd/wire"
+	dcrutil "github.com/coolsnady/hcutil"
 )
 
 // *****************************
@@ -2818,7 +2818,7 @@ func (c *Client) GenerateVote(blockHash *chainhash.Hash, height int64, sstxHash 
 	return c.GenerateVoteAsync(blockHash, height, sstxHash, voteBits, voteBitsExt).Receive()
 }
 
-// NOTE: While getinfo is implemented here (in wallet.go), a dcrd chain server
+// NOTE: While getinfo is implemented here (in wallet.go), a hcd chain server
 // will respond to getinfo requests as well, excluding any wallet information.
 
 // FutureGetInfoResult is a future promise to deliver the result of a

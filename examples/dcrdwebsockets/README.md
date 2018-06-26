@@ -1,7 +1,7 @@
-dcrd Websockets Example
+hcd Websockets Example
 =======================
 
-This example shows how to use the dcrrpcclient package to connect to a dcrd
+This example shows how to use the hcrpcclient package to connect to a hcd
 RPC server using TLS-secured websockets, register for block connected and block
 disconnected notifications, and get the current block count.
 
@@ -10,11 +10,11 @@ demonstrate clean shutdown.
 
 ## Running the Example
 
-The first step is to use `go get` to download and install the dcrrpcclient
+The first step is to use `go get` to download and install the hcrpcclient
 package:
 
 ```bash
-$ go get github.com/decred/dcrrpcclient
+$ go get github.com/decred/hcrpcclient
 ```
 
 Next, modify the `main.go` source to specify the correct RPC username and
@@ -28,7 +28,7 @@ password for the RPC server:
 Finally, navigate to the example's directory and run it with:
 
 ```bash
-$ cd $GOPATH/src/github.com/decred/dcrrpcclient/examples/dcrdwebsockets
+$ cd $GOPATH/src/github.com/decred/hcrpcclient/examples/dcrdwebsockets
 $ go run *.go
 ```
 

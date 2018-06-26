@@ -1,7 +1,7 @@
 dcrwallet Websockets Example
 ============================
 
-This example shows how to use the dcrrpcclient package to connect to a dcrwallet
+This example shows how to use the hcrpcclient package to connect to a dcrwallet
 RPC server using TLS-secured websockets, register for notifications about
 changes to account balances, and get a list of unspent transaction outputs
 (utxos) the wallet can sign.
@@ -11,11 +11,11 @@ demonstrate clean shutdown.
 
 ## Running the Example
 
-The first step is to use `go get` to download and install the dcrrpcclient
+The first step is to use `go get` to download and install the hcrpcclient
 package:
 
 ```bash
-$ go get github.com/decred/dcrrpcclient
+$ go get github.com/decred/hcrpcclient
 ```
 
 Next, modify the `main.go` source to specify the correct RPC username and

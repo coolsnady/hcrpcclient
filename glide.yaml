@@ -1,4 +1,4 @@
-package: github.com/hybridnetwork/hxrpcclient
+package: github.com/coolsnady/hcrpcclient
 import:
 - package: github.com/btcsuite/btclog
 - package: github.com/btcsuite/go-socks
@@ -8,11 +8,11 @@ import:
 - package: github.com/davecgh/go-spew
   subpackages:
   - spew
-- package: github.com/hybridnetwork/hxd
+- package: github.com/coolsnady/hcd
   version: rc1.0
   subpackages:
   - blockchain/stake
   - chaincfg/chainhash
   - dcrjson
   - wire
-- package: github.com/hybridnetwork/hxutil
+- package: github.com/coolsnady/hcutil

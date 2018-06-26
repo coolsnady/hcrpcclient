@@ -3,7 +3,7 @@
 // Use of this source code is governed by an ISC
 // license that can be found in the LICENSE file.
 
-package dcrrpcclient
+package hcrpcclient
 
 import (
 	"encoding/hex"
@@ -13,10 +13,10 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/hybridnetwork/hxd/chaincfg/chainhash"
-	"github.com/hybridnetwork/hxd/dcrjson"
-	"github.com/hybridnetwork/hxd/wire"
-	dcrutil "github.com/hybridnetwork/hxutil"
+	"github.com/coolsnady/hcd/chaincfg/chainhash"
+	"github.com/coolsnady/hcd/dcrjson"
+	"github.com/coolsnady/hcd/wire"
+	dcrutil "github.com/coolsnady/hcutil"
 )
 
 var (
@@ -154,7 +154,7 @@ type NotificationHandlers struct {
 	OnTxAcceptedVerbose func(txDetails *dcrjson.TxRawResult)
 
 	// OnBtcdConnected is invoked when a wallet connects or disconnects from
-	// dcrd.
+	// hcd.
 	//
 	// This will only be available when client is connected to a wallet
 	// server such as dcrwallet.
@@ -408,7 +408,7 @@ func (c *Client) handleNotification(ntfn *rawNotification) {
 
 		connected, err := parseBtcdConnectedNtfnParams(ntfn.Params)
 		if err != nil {
-			log.Warnf("Received invalid dcrd connected "+
+			log.Warnf("Received invalid hcd connected "+
 				"notification: %v", err)
 			return
 		}
@@ -957,7 +957,7 @@ func parseTxAcceptedVerboseNtfnParams(params []json.RawMessage) (*dcrjson.TxRawR
 	return &rawTx, nil
 }
 
-// parseBtcdConnectedNtfnParams parses out the connection status of dcrd
+// parseBtcdConnectedNtfnParams parses out the connection status of hcd
 // and dcrwallet from the parameters of a btcdconnected notification.
 func parseBtcdConnectedNtfnParams(params []json.RawMessage) (bool, error) {
 	if len(params) != 1 {
@@ -1185,7 +1185,7 @@ func (r FutureNotifyBlocksResult) Receive() error {
 //
 // See NotifyBlocks for the blocking version and more details.
 //
-// NOTE: This is a dcrd extension and requires a websocket connection.
+// NOTE: This is a hcd extension and requires a websocket connection.
 func (c *Client) NotifyBlocksAsync() FutureNotifyBlocksResult {
 	// Not supported in HTTP POST mode.
 	if c.config.HTTPPostMode {
@@ -1211,7 +1211,7 @@ func (c *Client) NotifyBlocksAsync() FutureNotifyBlocksResult {
 // The notifications delivered as a result of this call will be via one of
 // OnBlockConnected or OnBlockDisconnected.
 //
-// NOTE: This is a dcrd extension and requires a websocket connection.
+// NOTE: This is a hcd extension and requires a websocket connection.
 func (c *Client) NotifyBlocks() error {
 	return c.NotifyBlocksAsync().Receive()
 }
@@ -1237,7 +1237,7 @@ func (r FutureNotifyWinningTicketsResult) Receive() error {
 //
 // See NotifyWinningTickets for the blocking version and more details.
 //
-// NOTE: This is a dcrd extension and requires a websocket connection.
+// NOTE: This is a hcd extension and requires a websocket connection.
 func (c *Client) NotifyWinningTicketsAsync() FutureNotifyWinningTicketsResult {
 	// Not supported in HTTP POST mode.
 	if c.config.HTTPPostMode {
@@ -1265,7 +1265,7 @@ func (c *Client) NotifyWinningTicketsAsync() FutureNotifyWinningTicketsResult {
 // The notifications delivered as a result of this call will be those from
 // OnWinningTickets.
 //
-// NOTE: This is a dcrd extension and requires a websocket connection.
+// NOTE: This is a hcd extension and requires a websocket connection.
 func (c *Client) NotifyWinningTickets() error {
 	return c.NotifyWinningTicketsAsync().Receive()
 }
@@ -1291,7 +1291,7 @@ func (r FutureNotifySpentAndMissedTicketsResult) Receive() error {
 //
 // See NotifySpentAndMissedTickets for the blocking version and more details.
 //
-// NOTE: This is a dcrd extension and requires a websocket connection.
+// NOTE: This is a hcd extension and requires a websocket connection.
 func (c *Client) NotifySpentAndMissedTicketsAsync() FutureNotifySpentAndMissedTicketsResult {
 	// Not supported in HTTP POST mode.
 	if c.config.HTTPPostMode {
@@ -1319,7 +1319,7 @@ func (c *Client) NotifySpentAndMissedTicketsAsync() FutureNotifySpentAndMissedTi
 // The notifications delivered as a result of this call will be those from
 // OnSpentAndMissedTickets.
 //
-// NOTE: This is a dcrd extension and requires a websocket connection.
+// NOTE: This is a hcd extension and requires a websocket connection.
 func (c *Client) NotifySpentAndMissedTickets() error {
 	return c.NotifySpentAndMissedTicketsAsync().Receive()
 }
@@ -1345,7 +1345,7 @@ func (r FutureNotifyNewTicketsResult) Receive() error {
 //
 // See NotifyNewTickets for the blocking version and more details.
 //
-// NOTE: This is a dcrd extension and requires a websocket connection.
+// NOTE: This is a hcd extension and requires a websocket connection.
 func (c *Client) NotifyNewTicketsAsync() FutureNotifyNewTicketsResult {
 	// Not supported in HTTP POST mode.
 	if c.config.HTTPPostMode {
@@ -1371,7 +1371,7 @@ func (c *Client) NotifyNewTicketsAsync() FutureNotifyNewTicketsResult {
 //
 // The notifications delivered as a result of this call will be via OnNewTickets.
 //
-// NOTE: This is a dcrd extension and requires a websocket connection.
+// NOTE: This is a hcd extension and requires a websocket connection.
 func (c *Client) NotifyNewTickets() error {
 	return c.NotifyNewTicketsAsync().Receive()
 }
@@ -1397,7 +1397,7 @@ func (r FutureNotifyStakeDifficultyResult) Receive() error {
 //
 // See NotifyStakeDifficulty for the blocking version and more details.
 //
-// NOTE: This is a dcrd extension and requires a websocket connection.
+// NOTE: This is a hcd extension and requires a websocket connection.
 func (c *Client) NotifyStakeDifficultyAsync() FutureNotifyStakeDifficultyResult {
 	// Not supported in HTTP POST mode.
 	if c.config.HTTPPostMode {
@@ -1425,7 +1425,7 @@ func (c *Client) NotifyStakeDifficultyAsync() FutureNotifyStakeDifficultyResult 
 // The notifications delivered as a result of this call will be via
 // OnStakeDifficulty.
 //
-// NOTE: This is a dcrd extension and requires a websocket connection.
+// NOTE: This is a hcd extension and requires a websocket connection.
 func (c *Client) NotifyStakeDifficulty() error {
 	return c.NotifyStakeDifficultyAsync().Receive()
 }
@@ -1451,7 +1451,7 @@ func (r FutureNotifyNewTransactionsResult) Receive() error {
 //
 // See NotifyNewTransactionsAsync for the blocking version and more details.
 //
-// NOTE: This is a dcrd extension and requires a websocket connection.
+// NOTE: This is a hcd extension and requires a websocket connection.
 func (c *Client) NotifyNewTransactionsAsync(verbose bool) FutureNotifyNewTransactionsResult {
 	// Not supported in HTTP POST mode.
 	if c.config.HTTPPostMode {
@@ -1478,7 +1478,7 @@ func (c *Client) NotifyNewTransactionsAsync(verbose bool) FutureNotifyNewTransac
 // OnTxAccepted (when verbose is false) or OnTxAcceptedVerbose (when verbose is
 // true).
 //
-// NOTE: This is a dcrd extension and requires a websocket connection.
+// NOTE: This is a hcd extension and requires a websocket connection.
 func (c *Client) NotifyNewTransactions(verbose bool) error {
 	return c.NotifyNewTransactionsAsync(verbose).Receive()
 }
@@ -1500,7 +1500,7 @@ func (r FutureLoadTxFilterResult) Receive() error {
 //
 // See LoadTxFilter for the blocking version and more details.
 //
-// NOTE: This is a dcrd extension and requires a websocket connection.
+// NOTE: This is a hcd extension and requires a websocket connection.
 func (c *Client) LoadTxFilterAsync(reload bool, addresses []dcrutil.Address,
 	outPoints []wire.OutPoint) FutureLoadTxFilterResult {
 
@@ -1536,7 +1536,7 @@ func (c *Client) LoadTxFilterAsync(reload bool, addresses []dcrutil.Address,
 // filter.  The filter is consistently updated based on inspected transactions
 // during mempool acceptence, block acceptence, and for all rescanned blocks.
 //
-// NOTE: This is a dcrd extension and requires a websocket connection.
+// NOTE: This is a hcd extension and requires a websocket connection.
 func (c *Client) LoadTxFilter(reload bool, addresses []dcrutil.Address, outPoints []wire.OutPoint) error {
 	return c.LoadTxFilterAsync(reload, addresses, outPoints).Receive()
 }

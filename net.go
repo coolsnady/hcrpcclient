@@ -3,12 +3,12 @@
 // Use of this source code is governed by an ISC
 // license that can be found in the LICENSE file.
 
-package dcrrpcclient
+package hcrpcclient
 
 import (
 	"encoding/json"
 
-	"github.com/hybridnetwork/hxd/dcrjson"
+	"github.com/coolsnady/hcd/dcrjson"
 )
 
 // AddNodeCommand enumerates the available commands that the AddNode function

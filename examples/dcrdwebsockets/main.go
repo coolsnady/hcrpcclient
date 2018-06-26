@@ -11,16 +11,16 @@ import (
 	"path/filepath"
 	"time"
 
-	dcrrpcclient "github.com/hybridnetwork/hxrpcclient"
-	dcrutil "github.com/hybridnetwork/hxutil"
+	hcrpcclient "github.com/coolsnady/hcrpcclient"
+	dcrutil "github.com/coolsnady/hcutil"
 )
 
 func main() {
 	// Only override the handlers for notifications you care about.
 	// Also note most of these handlers will only be called if you register
-	// for notifications.  See the documentation of the dcrrpcclient
+	// for notifications.  See the documentation of the hcrpcclient
 	// NotificationHandlers type for more details about each handler.
-	ntfnHandlers := dcrrpcclient.NotificationHandlers{
+	ntfnHandlers := hcrpcclient.NotificationHandlers{
 		OnBlockConnected: func(blockHeader []byte, transactions [][]byte) {
 			log.Printf("Block connected: %v %v", blockHeader, transactions)
 		},
@@ -29,20 +29,20 @@ func main() {
 		},
 	}
 
-	// Connect to local dcrd RPC server using websockets.
-	dcrdHomeDir := dcrutil.AppDataDir("hxd", false)
+	// Connect to local hcd RPC server using websockets.
+	dcrdHomeDir := dcrutil.AppDataDir("hcd", false)
 	certs, err := ioutil.ReadFile(filepath.Join(dcrdHomeDir, "rpc.cert"))
 	if err != nil {
 		log.Fatal(err)
 	}
-	connCfg := &dcrrpcclient.ConnConfig{
+	connCfg := &hcrpcclient.ConnConfig{
 		Host:         "localhost:14009",
 		Endpoint:     "ws",
 		User:         "yourrpcuser",
 		Pass:         "yourrpcpass",
 		Certificates: certs,
 	}
-	client, err := dcrrpcclient.New(connCfg, &ntfnHandlers)
+	client, err := hcrpcclient.New(connCfg, &ntfnHandlers)
 	if err != nil {
 		log.Fatal(err)
 	}

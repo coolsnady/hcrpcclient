@@ -3,16 +3,16 @@
 // Use of this source code is governed by an ISC
 // license that can be found in the LICENSE file.
 
-package dcrrpcclient
+package hcrpcclient
 
 import (
 	"encoding/hex"
 	"encoding/json"
 	"errors"
 
-	"github.com/hybridnetwork/hxd/chaincfg/chainhash"
-	"github.com/hybridnetwork/hxd/dcrjson"
-	dcrutil "github.com/hybridnetwork/hxutil"
+	"github.com/coolsnady/hcd/chaincfg/chainhash"
+	"github.com/coolsnady/hcd/dcrjson"
+	dcrutil "github.com/coolsnady/hcutil"
 )
 
 // FutureGenerateResult is a future promise to deliver the result of a
