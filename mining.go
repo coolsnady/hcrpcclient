@@ -12,7 +12,7 @@ import (
 
 	"github.com/coolsnady/hcd/chaincfg/chainhash"
 	"github.com/coolsnady/hcd/dcrjson"
-	dcrutil "github.com/coolsnady/hcutil"
+	"github.com/coolsnady/hcutil"
 )
 
 // FutureGenerateResult is a future promise to deliver the result of a
@@ -438,7 +438,7 @@ func (r FutureSubmitBlockResult) Receive() error {
 // returned instance.
 //
 // See SubmitBlock for the blocking version and more details.
-func (c *Client) SubmitBlockAsync(block *dcrutil.Block, options *dcrjson.SubmitBlockOptions) FutureSubmitBlockResult {
+func (c *Client) SubmitBlockAsync(block *hcutil.Block, options *dcrjson.SubmitBlockOptions) FutureSubmitBlockResult {
 	blockHex := ""
 	if block != nil {
 		blockBytes, err := block.Bytes()
@@ -454,6 +454,6 @@ func (c *Client) SubmitBlockAsync(block *dcrutil.Block, options *dcrjson.SubmitB
 }
 
 // SubmitBlock attempts to submit a new block into the decred network.
-func (c *Client) SubmitBlock(block *dcrutil.Block, options *dcrjson.SubmitBlockOptions) error {
+func (c *Client) SubmitBlock(block *hcutil.Block, options *dcrjson.SubmitBlockOptions) error {
 	return c.SubmitBlockAsync(block, options).Receive()
 }

@@ -13,7 +13,7 @@ import (
 
 	"github.com/davecgh/go-spew/spew"
 	hcrpcclient "github.com/coolsnady/hcrpcclient"
-	dcrutil "github.com/coolsnady/hcutil"
+	"github.com/coolsnady/hcutil"
 )
 
 func main() {
@@ -22,14 +22,14 @@ func main() {
 	// for notifications.  See the documentation of the hcrpcclient
 	// NotificationHandlers type for more details about each handler.
 	ntfnHandlers := hcrpcclient.NotificationHandlers{
-		OnAccountBalance: func(account string, balance dcrutil.Amount, confirmed bool) {
+		OnAccountBalance: func(account string, balance hcutil.Amount, confirmed bool) {
 			log.Printf("New balance for account %s: %v", account,
 				balance)
 		},
 	}
 
 	// Connect to local dcrwallet RPC server using websockets.
-	certHomeDir := dcrutil.AppDataDir("hcwallet", false)
+	certHomeDir := hcutil.AppDataDir("hcwallet", false)
 	certs, err := ioutil.ReadFile(filepath.Join(certHomeDir, "rpc.cert"))
 	if err != nil {
 		log.Fatal(err)

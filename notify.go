@@ -16,7 +16,7 @@ import (
 	"github.com/coolsnady/hcd/chaincfg/chainhash"
 	"github.com/coolsnady/hcd/dcrjson"
 	"github.com/coolsnady/hcd/wire"
-	dcrutil "github.com/coolsnady/hcutil"
+	"github.com/coolsnady/hcutil"
 )
 
 var (
@@ -145,7 +145,7 @@ type NotificationHandlers struct {
 	// memory pool.  It will only be invoked if a preceding call to
 	// NotifyNewTransactions with the verbose flag set to false has been
 	// made to register for the notification and the function is non-nil.
-	OnTxAccepted func(hash *chainhash.Hash, amount dcrutil.Amount)
+	OnTxAccepted func(hash *chainhash.Hash, amount hcutil.Amount)
 
 	// OnTxAccepted is invoked when a transaction is accepted into the
 	// memory pool.  It will only be invoked if a preceding call to
@@ -164,7 +164,7 @@ type NotificationHandlers struct {
 	//
 	// This will only be available when speaking to a wallet server
 	// such as dcrwallet.
-	OnAccountBalance func(account string, balance dcrutil.Amount, confirmed bool)
+	OnAccountBalance func(account string, balance hcutil.Amount, confirmed bool)
 
 	// OnWalletLockState is invoked when a wallet is locked or unlocked.
 	//
@@ -176,7 +176,7 @@ type NotificationHandlers struct {
 	//
 	// This will only be available when client is connected to a wallet
 	// server such as dcrwallet.
-	OnTicketsPurchased func(TxHash *chainhash.Hash, amount dcrutil.Amount)
+	OnTicketsPurchased func(TxHash *chainhash.Hash, amount hcutil.Amount)
 
 	// OnVotesCreated is invoked when a wallet generates an SSGen.
 	//
@@ -900,7 +900,7 @@ func parseRescanProgressParams(params []json.RawMessage) (*chainhash.Hash, int32
 // parseTxAcceptedNtfnParams parses out the transaction hash and total amount
 // from the parameters of a txaccepted notification.
 func parseTxAcceptedNtfnParams(params []json.RawMessage) (*chainhash.Hash,
-	dcrutil.Amount, error) {
+	hcutil.Amount, error) {
 
 	if len(params) != 2 {
 		return nil, 0, wrongNumParams(len(params))
@@ -921,7 +921,7 @@ func parseTxAcceptedNtfnParams(params []json.RawMessage) (*chainhash.Hash,
 	}
 
 	// Bounds check amount.
-	amt, err := dcrutil.NewAmount(famt)
+	amt, err := hcutil.NewAmount(famt)
 	if err != nil {
 		return nil, 0, err
 	}
@@ -978,7 +978,7 @@ func parseBtcdConnectedNtfnParams(params []json.RawMessage) (bool, error) {
 // and whether or not the balance is confirmed or unconfirmed from the
 // parameters of an accountbalance notification.
 func parseAccountBalanceNtfnParams(params []json.RawMessage) (account string,
-	balance dcrutil.Amount, confirmed bool, err error) {
+	balance hcutil.Amount, confirmed bool, err error) {
 
 	if len(params) != 3 {
 		return "", 0, false, wrongNumParams(len(params))
@@ -1004,7 +1004,7 @@ func parseAccountBalanceNtfnParams(params []json.RawMessage) (account string,
 	}
 
 	// Bounds check amount.
-	bal, err := dcrutil.NewAmount(fbal)
+	bal, err := hcutil.NewAmount(fbal)
 	if err != nil {
 		return "", 0, false, err
 	}
@@ -1015,7 +1015,7 @@ func parseAccountBalanceNtfnParams(params []json.RawMessage) (account string,
 // parseTicketPurchasedNtfnParams parses out the ticket hash and amount
 // from a recent ticket purchase in the wallet.
 func parseTicketPurchasedNtfnParams(params []json.RawMessage) (txHash *chainhash.Hash,
-	amount dcrutil.Amount, err error) {
+	amount hcutil.Amount, err error) {
 
 	if len(params) != 2 {
 		return nil, 0, wrongNumParams(len(params))
@@ -1039,7 +1039,7 @@ func parseTicketPurchasedNtfnParams(params []json.RawMessage) (txHash *chainhash
 		return nil, 0, err
 	}
 
-	return thHash, dcrutil.Amount(amt), nil
+	return thHash, hcutil.Amount(amt), nil
 }
 
 // parseVoteCreatedNtfnParams parses out the hash, block hash, block height,
@@ -1501,19 +1501,19 @@ func (r FutureLoadTxFilterResult) Receive() error {
 // See LoadTxFilter for the blocking version and more details.
 //
 // NOTE: This is a hcd extension and requires a websocket connection.
-func (c *Client) LoadTxFilterAsync(reload bool, addresses []dcrutil.Address,
+func (c *Client) LoadTxFilterAsync(reload bool, addresses []hcutil.Address,
 	outPoints []wire.OutPoint) FutureLoadTxFilterResult {
 
 	addrStrs := make([]string, len(addresses))
 	for i, a := range addresses {
 		switch addr := a.(type) {
-		case *dcrutil.AddressSecpPubKey :
+		case *hcutil.AddressSecpPubKey :
 			addrStrs[i] = addr.EncodeAddress()
-		case *dcrutil.AddressBlissPubKey:
+		case *hcutil.AddressBlissPubKey:
 			addrStrs[i] = addr.EncodeAddress()
-		case *dcrutil.AddressPubKeyHash:
+		case *hcutil.AddressPubKeyHash:
 			addrStrs[i] = addr.EncodeAddress()
-		case *dcrutil.AddressScriptHash:
+		case *hcutil.AddressScriptHash:
 			addrStrs[i] = addr.EncodeAddress()
 		default:
 			addrStrs[i] = addr.EncodeAddress()
@@ -1537,6 +1537,6 @@ func (c *Client) LoadTxFilterAsync(reload bool, addresses []dcrutil.Address,
 // during mempool acceptence, block acceptence, and for all rescanned blocks.
 //
 // NOTE: This is a hcd extension and requires a websocket connection.
-func (c *Client) LoadTxFilter(reload bool, addresses []dcrutil.Address, outPoints []wire.OutPoint) error {
+func (c *Client) LoadTxFilter(reload bool, addresses []hcutil.Address, outPoints []wire.OutPoint) error {
 	return c.LoadTxFilterAsync(reload, addresses, outPoints).Receive()
 }

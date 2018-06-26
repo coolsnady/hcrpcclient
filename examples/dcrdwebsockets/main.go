@@ -12,7 +12,7 @@ import (
 	"time"
 
 	hcrpcclient "github.com/coolsnady/hcrpcclient"
-	dcrutil "github.com/coolsnady/hcutil"
+	"github.com/coolsnady/hcutil"
 )
 
 func main() {
@@ -30,7 +30,7 @@ func main() {
 	}
 
 	// Connect to local hcd RPC server using websockets.
-	dcrdHomeDir := dcrutil.AppDataDir("hcd", false)
+	dcrdHomeDir := hcutil.AppDataDir("hcd", false)
 	certs, err := ioutil.ReadFile(filepath.Join(dcrdHomeDir, "rpc.cert"))
 	if err != nil {
 		log.Fatal(err)
