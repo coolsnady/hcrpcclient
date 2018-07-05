@@ -1,5 +1,6 @@
 // Copyright (c) 2014-2015 The btcsuite developers
-// Copyright (c) 2015-2016 The Hcd developers
+// Copyright (c) 2015-2016 The Decred developers
+// Copyright (c) 2018-2020 The Hcd developers
 // Copyright (c) 2017 The Dcr developers
 // Use of this source code is governed by an ISC
 // license that can be found in the LICENSE file.
@@ -213,7 +214,7 @@ func (c *Client) ExistsAddressesAsync(addresses []hcutil.Address) FutureExistsAd
 	addrStrs := make([]string, len(addresses))
 	for i, a := range addresses {
 		switch addr := a.(type) {
-		case *hcutil.AddressSecpPubKey :
+		case *hcutil.AddressSecpPubKey:
 			addrStrs[i] = addr.EncodeAddress()
 		case *hcutil.AddressBlissPubKey:
 			addrStrs[i] = addr.EncodeAddress()

@@ -1,5 +1,6 @@
 // Copyright (c) 2014-2016 The btcsuite developers
-// Copyright (c) 2015 The Hcd developers
+// Copyright (c) 2015 The Decred developers
+// Copyright (c) 2018-2020 The Hcd developers
 // Use of this source code is governed by an ISC
 // license that can be found in the LICENSE file.
 
@@ -628,7 +629,6 @@ func (c *Client) RescanAsync(blockHashes []chainhash.Hash) FutureRescanResult {
 func (c *Client) Rescan(blockHashes []chainhash.Hash) (*dcrjson.RescanResult, error) {
 	return c.RescanAsync(blockHashes).Receive()
 }
-
 
 // FutureGetBlockSubsidyResult is a future promise to deliver the result of a
 // GetBlockSubsidyAsync RPC invocation (or an applicable error).

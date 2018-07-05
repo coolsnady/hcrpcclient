@@ -1,5 +1,6 @@
 // Copyright (c) 2014 The btcsuite developers
-// Copyright (c) 2016 The Hcd developers
+// Copyright (c) 2016 The Decred developers
+// Copyright (c) 2018-2020 The Hcd developers
 // Use of this source code is governed by an ISC
 // license that can be found in the LICENSE file.
 
@@ -11,8 +12,8 @@ Overview
 This client provides a robust and easy to use client for interfacing
 with a Hcd RPC server that uses a mostly btcd/bitcoin core
 style Hcd JSON-RPC API.  This client has been tested with hcd
-(https://github.com/decred/hcd) and dcrwallet
-(https://github.com/decred/dcrwallet).
+(https://github.com/coolsnady/hcd) and hcwallet
+(https://github.com/coolsnady/hcwallet).
 
 In addition to the compatible standard HTTP POST JSON-RPC API, hcd and
 dcrwallet provide a websocket interface that is more efficient than the standard

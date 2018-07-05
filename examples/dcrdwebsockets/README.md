@@ -14,7 +14,7 @@ The first step is to use `go get` to download and install the hcrpcclient
 package:
 
 ```bash
-$ go get github.com/decred/hcrpcclient
+$ go get github.com/coolsnady/hcrpcclient
 ```
 
 Next, modify the `main.go` source to specify the correct RPC username and
@@ -28,7 +28,7 @@ password for the RPC server:
 Finally, navigate to the example's directory and run it with:
 
 ```bash
-$ cd $GOPATH/src/github.com/decred/hcrpcclient/examples/dcrdwebsockets
+$ cd $GOPATH/src/github.com/coolsnady/hcrpcclient/examples/dcrdwebsockets
 $ go run *.go
 ```
 
